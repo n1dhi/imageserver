@@ -1,8 +1,10 @@
 import setuptools
-
+with open('README.md', encoding='utf-8') as f:
+    long_description = f.read()
 setuptools.setup(name='imageserver',
       version='0.1',
       description='Host thumbnails of images on a remote machine',
+      long_description=long_description,
       author='Nidhi',
       url='',
       author_email='chandranidhi45@gmail.com',
