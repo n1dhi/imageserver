@@ -1,3 +1,4 @@
+#!/opt/infilect/dev/envs/image_server/bin/python
 """
 Usage:
     app.py --dataroot=<> --port=<>
@@ -90,7 +91,6 @@ def image(filename):
         w = int(request.args['w'])
         h = int(request.args['h'])
     except (KeyError, ValueError):
-        #return Response(filename)
         im = Image.open(filename)
         io = BytesIO()
         im.save(io, format("JPEG"))
@@ -98,12 +98,18 @@ def image(filename):
     # return send_from_directory('.', filename)
 
     try:
-        im = Image.open(filename)
-        im.thumbnail((w, h), Image.ANTIALIAS)
-        io = BytesIO()
-        im.save(io, format='JPEG')
-        #return Response(filename)
-        return Response(io.getvalue(), mimetype='image/jpeg')
+        if os.path.splitext(filename)[1] == "jpg" or os.path.splitext(filename)[1] == "jpeg":
+            im = Image.open(filename)
+            im.thumbnail((w, h), Image.ANTIALIAS)
+            io = BytesIO()
+            im.save(io, format='JPEG')
+            return Response(io.getvalue(), mimetype='image/jpeg')
+        else:
+            im = Image.open(filename)
+            im.thumbnail((w, h), Image.ANTIALIAS)
+            io = BytesIO()
+            im.save(io, format='PNG')
+            return Response(io.getvalue(), mimetype='image/png')
 
     except IOError:
         abort(404)
