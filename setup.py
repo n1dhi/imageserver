@@ -2,10 +2,10 @@ import setuptools
 with open('README.md', encoding='utf-8') as f:
     long_description = f.read()
 setuptools.setup(name='imageserver',
-      version='0.1.1',
-      description='Host thumbnails for images',
+      version='0.1.4',
+      description='Host thumbnails for images   ',
       long_description=long_description,
-      author='Nidhi',
+      author='Nidhi Chandra',
       url='',
       author_email='chandranidhi45@gmail.com',
       license='MIT',
@@ -14,7 +14,8 @@ setuptools.setup(name='imageserver',
     install_requires=[
         'docopt',
         'flask',
-        'pillow'
+        'pillow',
+        'opencv-python'
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

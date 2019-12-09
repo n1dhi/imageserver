@@ -14,7 +14,7 @@ from flask import Flask, Response, request, abort, render_template_string, send_
 from PIL import Image
 from io import BytesIO
 import docopt
-
+import cv2
 args = docopt.docopt(__doc__)
 dataroot = args["--dataroot"]
 port = int(args["--port"])
@@ -27,7 +27,8 @@ TEMPLATE = '''
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
+<title>Infilect Tools</title>
+<link rel="shortcut icon" type="image/x-icon" href="https://infilect.com/wp-content/uploads/2018/03/favicon.ico" />
 <meta charset="utf-8" />
 <style>
 body {
@@ -123,10 +124,12 @@ def index():
         for filename in [os.path.join(root, name) for name in files]:
             if not (filename.endswith('.jpg') or filename.endswith('.jpeg') or filename.endswith('png')):
                 continue
-            im = Image.open(filename)
-            w, h = im.size
-    #        print("{}  {}   {}".format(filename,w,h))
-        
+            image = cv2.imread(filename)
+            if image is None:
+                continue
+            #im = Image.open(filename)
+            
+            h, w = image.shape[:2]        
             aspect = 1.0*w/h
             if aspect > 1.0:
                 width = WIDTH#min(w, WIDTH)
