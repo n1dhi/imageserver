@@ -1,4 +1,4 @@
-Host images on your server as thumbnails
+Host images on your machine as thumbnails
 
 *To use, simply do:*
 
