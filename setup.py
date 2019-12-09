@@ -2,7 +2,7 @@ import setuptools
 with open('README.md', encoding='utf-8') as f:
     long_description = f.read()
 setuptools.setup(name='imageserver',
-      version='0.1',
+      version='0.1.1',
       description='Host thumbnails for images',
       long_description=long_description,
       author='Nidhi',
